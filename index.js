@@ -1,4 +1,17 @@
 const container = document.getElementsByClassName("container")[0];
+
+const timer = document.getElementsByClassName("timer")[0];
+let startTime;
+let interval;
+function startTimer() {
+  interval = setInterval(() => {
+    const distance = new Date() - startTime;
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    const milliseconds = Math.floor((distance % 10000) / 100);
+    timer.innerHTML = `${seconds} : ${milliseconds}`;
+  }, 10);
+}
+
 const images = [
   {
     name: "fries",
@@ -45,7 +58,8 @@ function shuffle(cards) {
     ];
   }
 }
-
+let firstClick = false;
+let gameOver = 0;
 shuffle(cards);
 let isBlocked = false;
 for (let i = 0; i < cards.length; i++) {
@@ -61,11 +75,16 @@ let chosenCards = [];
 
 function flipCard(e) {
   if (chosenCards.length != 2 && !isBlocked) {
+    if (!firstClick) {
+      firstClick = true;
+      startTime = new Date();
+      startTimer();
+    }
     e.target.className = "flipped-card";
     chosenCards.push(e.target);
-    if (chosenCards.length == 2) {
+    if (chosenCards.length === 2) {
       isBlocked = true;
-      setTimeout(checkForMatch, 1000);
+      setTimeout(checkForMatch, 700);
     }
   }
 }
@@ -79,10 +98,15 @@ function checkForMatch() {
     chosenCards = [];
     firstCard.className += " selected";
     secondCard.className += " selected";
+    gameOver += 2;
   } else {
     firstCard.className = "unflipped-card";
     secondCard.className = "unflipped-card";
     chosenCards = [];
+  }
+  if (gameOver === cards.length) {
+    clearInterval(interval);
+    // alert("Congratulations!");
   }
   isBlocked = false;
 }

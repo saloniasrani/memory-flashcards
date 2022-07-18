@@ -1,16 +1,19 @@
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100vw;
   height: 100vh;
-  /* background: linear-gradient(to right, #89216b, #da4453); */
   background-color: #00072d;
-  /* #00072d */
   margin: 0;
   padding: 0;
 }
-
+.timer {
+  font-size: 35px;
+  color: aliceblue;
+  padding: 50px;
+}
 .container {
   display: grid;
   grid-template-columns: 100px 100px 100px 100px;
