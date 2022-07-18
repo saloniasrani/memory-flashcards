@@ -16,7 +16,6 @@ body {
   grid-template-columns: 100px 100px 100px 100px;
   grid-template-rows: 140px 140px 140px;
   gap: 50px 50px;
-  /* perspective: 1000px; */
 }
 
 .flipped-card {
@@ -26,7 +25,6 @@ body {
   border: 5px solid white;
   align-items: center;
   border-radius: 5px;
-  /* background-color: white; */
   cursor: block;
   pointer-events: none;
   transition: all 700ms ease-out;
@@ -73,4 +71,8 @@ body {
 
 .unflipped-card img {
   display: none;
+}
+
+.selected {
+  opacity: 0.5;
 }

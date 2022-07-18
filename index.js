@@ -47,42 +47,42 @@ function shuffle(cards) {
 }
 
 shuffle(cards);
-
+let isBlocked = false;
 for (let i = 0; i < cards.length; i++) {
   let card = document.createElement("div");
   card.className = "unflipped-card";
   card.innerHTML = `<img src= "${cards[i].img}"/>`;
-  card.setAttribute("pic-id", i);
-  card.addEventListener("click", flipCard);
-  card.onclick = (e) => {
-    card.className = "flipped-card";
-    console.log(card.getAttribute("pic-id"));
-    // flipCard();
-  };
+  card.setAttribute("pic-name", cards[i].name);
+  card.onclick = flipCard;
 
   container.appendChild(card);
 }
 let chosenCards = [];
-let chosenCardId = [];
-function flipCard() {
-  if (chosenCards.length != 2) {
-    let cardid = this.getAttribute("pic-id");
-    console.log(cards[cardid].name);
-    chosenCards.push(cards[cardid].name);
-    chosenCardId.push(cardid);
-    //   console.log(chosenCards[0]);
-    //   console.log(chosenCards[1]);
 
-    if (chosenCards.length == 2) setTimeout(checkForMatch, 400);
+function flipCard(e) {
+  if (chosenCards.length != 2 && !isBlocked) {
+    e.target.className = "flipped-card";
+    chosenCards.push(e.target);
+    if (chosenCards.length == 2) {
+      isBlocked = true;
+      setTimeout(checkForMatch, 1000);
+    }
   }
 }
 function checkForMatch() {
   let firstCard = chosenCards[0];
   let secondCard = chosenCards[1];
-  if (firstCard === secondCard) alert("You found a Match!");
-  else {
-    alert("no match found");
-    // cards[chosenCardId[0]].className = "unflipped-card";
+  let isMatched =
+    firstCard.getAttribute("pic-name") === secondCard.getAttribute("pic-name");
+
+  if (isMatched) {
+    chosenCards = [];
+    firstCard.className += " selected";
+    secondCard.className += " selected";
+  } else {
+    firstCard.className = "unflipped-card";
+    secondCard.className = "unflipped-card";
     chosenCards = [];
   }
+  isBlocked = false;
 }
