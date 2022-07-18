@@ -1,0 +1,76 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  /* background: linear-gradient(to right, #89216b, #da4453); */
+  background-color: #00072d;
+  /* #00072d */
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 100px 100px 100px 100px;
+  grid-template-rows: 140px 140px 140px;
+  gap: 50px 50px;
+  /* perspective: 1000px; */
+}
+
+.flipped-card {
+  display: flex;
+  width: 100px;
+  height: 140px;
+  border: 5px solid white;
+  align-items: center;
+  border-radius: 5px;
+  /* background-color: white; */
+  cursor: block;
+  pointer-events: none;
+  transition: all 700ms ease-out;
+  transform: rotateY(180deg);
+}
+
+.unflipped-card {
+  cursor: pointer;
+  display: flex;
+  width: 100px;
+  height: 140px;
+  border: 5px solid white;
+  align-items: center;
+  border-radius: 5px;
+
+  background: linear-gradient(
+      135deg,
+      grey 22px,
+      white 22px,
+      white 24px,
+      transparent 24px,
+      transparent 67px,
+      white 67px,
+      white 69px,
+      transparent 69px
+    ),
+    linear-gradient(
+        225deg,
+        grey 22px,
+        white 22px,
+        white 24px,
+        transparent 24px,
+        transparent 67px,
+        white 67px,
+        white 69px,
+        transparent 69px
+      )
+      0 64px;
+}
+.container :active {
+  transform: scale(0.97);
+  transition: transform 0.2s;
+}
+
+.unflipped-card img {
+  display: none;
+}
