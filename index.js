@@ -66,6 +66,7 @@ let firstClick = false;
 let gameOver = 12;
 shuffle(cards);
 let isBlocked = false;
+
 for (let i = 0; i < cards.length; i++) {
   let card = document.createElement("div");
   card.className = "unflipped-card";
@@ -117,4 +118,7 @@ function checkForMatch() {
     // para.appendChild(node);
   }
   isBlocked = false;
+}
+function reset() {
+  window.location.reload();
 }
