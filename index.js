@@ -1,8 +1,12 @@
 const container = document.getElementsByClassName("container")[0];
-
+const message = document.getElementsByClassName("welcome")[0];
 const timer = document.getElementsByClassName("timer")[0];
+const win = (document.getElementsByClassName("win")[0].style.visibility =
+  "hidden");
+
 let startTime;
 let interval;
+
 function startTimer() {
   interval = setInterval(() => {
     const distance = new Date() - startTime;
@@ -59,7 +63,7 @@ function shuffle(cards) {
   }
 }
 let firstClick = false;
-let gameOver = 0;
+let gameOver = 12;
 shuffle(cards);
 let isBlocked = false;
 for (let i = 0; i < cards.length; i++) {
@@ -106,7 +110,11 @@ function checkForMatch() {
   }
   if (gameOver === cards.length) {
     clearInterval(interval);
-    // alert("Congratulations!");
+    const win = (document.getElementsByClassName("win")[0].style.visibility =
+      "visible");
+    // const para = document.createElement("p");
+    // const node = document.createTextNode("Click here to play again");
+    // para.appendChild(node);
   }
   isBlocked = false;
 }

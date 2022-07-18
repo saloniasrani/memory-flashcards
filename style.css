@@ -9,10 +9,26 @@ body {
   margin: 0;
   padding: 0;
 }
+.win {
+  font-size: 35px;
+  color: rgb(206, 236, 10);
+  text-align: center;
+  position: absolute;
+  z-index: 2;
+  background-color: rgba(149, 148, 148, 0.795);
+  width: 100vw;
+  min-height: 100vh;
+  padding-top: 48vh;
+}
+.welcome {
+  font-size: 35px;
+  color: aliceblue;
+  text-align: center;
+}
 .timer {
   font-size: 35px;
   color: aliceblue;
-  padding: 50px;
+  padding-bottom: 30px;
 }
 .container {
   display: grid;
@@ -32,6 +48,7 @@ body {
   pointer-events: none;
   transition: all 700ms ease-out;
   transform: rotateY(180deg);
+  background-color: white;
 }
 
 .unflipped-card {
@@ -45,7 +62,7 @@ body {
 
   background: linear-gradient(
       135deg,
-      grey 22px,
+      rgb(192, 192, 192) 22px,
       white 22px,
       white 24px,
       transparent 24px,
@@ -56,14 +73,14 @@ body {
     ),
     linear-gradient(
         225deg,
-        grey 22px,
+        rgb(192, 192, 192) 22px,
         white 22px,
         white 24px,
-        transparent 24px,
-        transparent 67px,
+        #a6e1fa 24px,
+        #a6e1fa 67px,
         white 67px,
         white 69px,
-        transparent 69px
+        #a6e1fa 69px
       )
       0 64px;
 }
@@ -78,4 +95,6 @@ body {
 
 .selected {
   opacity: 0.5;
+}
+.reset {
 }
