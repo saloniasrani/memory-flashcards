@@ -63,7 +63,7 @@ function shuffle(cards) {
   }
 }
 let firstClick = false;
-let gameOver = 12;
+let gameOver = 0;
 shuffle(cards);
 let isBlocked = false;
 
