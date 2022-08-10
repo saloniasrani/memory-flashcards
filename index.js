@@ -1,8 +1,5 @@
 const container = document.getElementsByClassName("container")[0];
-const message = document.getElementsByClassName("welcome")[0];
 const timer = document.getElementsByClassName("timer")[0];
-const win = (document.getElementsByClassName("win")[0].style.visibility =
-  "hidden");
 
 let startTime;
 let interval;
@@ -45,7 +42,7 @@ const images = [
 
 let cards = images.concat([...images]);
 
-function shuffle(cards) {
+function shuffle() {
   let currentIndex = cards.length;
   let randomIndex;
 
@@ -64,33 +61,37 @@ function shuffle(cards) {
 }
 let firstClick = false;
 let gameOver = 0;
-shuffle(cards);
+shuffle();
 let isBlocked = false;
+
+container.addEventListener("click", flipCard);
 
 for (let i = 0; i < cards.length; i++) {
   let card = document.createElement("div");
   card.className = "unflipped-card";
   card.innerHTML = `<img src= "${cards[i].img}"/>`;
   card.setAttribute("pic-name", cards[i].name);
-  card.onclick = flipCard;
 
   container.appendChild(card);
 }
 let chosenCards = [];
 
 function flipCard(e) {
-  if (chosenCards.length != 2 && !isBlocked) {
-    if (!firstClick) {
-      firstClick = true;
-      startTime = new Date();
-      startTimer();
+  if (e.target.className === "unflipped-card") {
+    if (chosenCards.length != 2 && !isBlocked) {
+      if (!firstClick) {
+        firstClick = true;
+        startTime = new Date();
+        startTimer();
+      }
+      e.target.className = "flipped-card";
+      chosenCards.push(e.target);
+      if (chosenCards.length === 2) {
+        isBlocked = true;
+        setTimeout(checkForMatch, 700);
+      }
     }
-    e.target.className = "flipped-card";
-    chosenCards.push(e.target);
-    if (chosenCards.length === 2) {
-      isBlocked = true;
-      setTimeout(checkForMatch, 700);
-    }
+    e.stopPropagation();
   }
 }
 function checkForMatch() {
@@ -113,9 +114,6 @@ function checkForMatch() {
     clearInterval(interval);
     const win = (document.getElementsByClassName("win")[0].style.visibility =
       "visible");
-    // const para = document.createElement("p");
-    // const node = document.createTextNode("Click here to play again");
-    // para.appendChild(node);
   }
   isBlocked = false;
 }
